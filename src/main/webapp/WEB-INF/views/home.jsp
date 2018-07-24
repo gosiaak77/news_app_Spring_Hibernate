@@ -15,11 +15,9 @@
     <p>created: ${article.created}</p>
 </c:forEach>
 <br>
-<div>
-    <h4>Categories</h4>
-<c:forEach items="${categoryList}" var="category">
-    <p><a href="${pageContext.request.contextPath}/category/${category.id}">${category.name}</a></p>
-</c:forEach>
-</div>
+
+<p><a href="${pageContext.request.contextPath}/category/">Categories manager</a> ||
+    <a href="${pageContext.request.contextPath}/author/">Authors manager</a> ||
+    <a href="${pageContext.request.contextPath}/article/">Articles manager</a></p>
 </body>
 </html>

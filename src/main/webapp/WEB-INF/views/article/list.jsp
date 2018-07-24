@@ -15,5 +15,6 @@
 </ul>
 
 <div><a href="${pageContext.request.contextPath}/article/form">Add new article</a> </div>
+<h5><a href="${pageContext.request.contextPath}/">Home</a></h5>
 </body>
 </html>
