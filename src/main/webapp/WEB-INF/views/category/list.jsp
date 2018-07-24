@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<h3>LCategory list</h3>
+<h3>Category list</h3>
 <ul>
 <c:forEach items="${categories}" var="category">
     <li>${category.name} - ${category.description}
@@ -15,5 +15,7 @@
 </ul>
 
 <div><a href="${pageContext.request.contextPath}/category/form">Add new category</a> </div>
+
+<h5><a href="${pageContext.request.contextPath}/">Home</a></h5>
 </body>
 </html>
