@@ -30,8 +30,8 @@ public class Article {
     @Size(min=4, max = 200, groups = {ValidationArticle.class, Default.class})
     private String title;
 
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(nullable = true)
     @NotNull(groups = ValidationArticle.class)
     private Author author;
 
@@ -122,4 +122,10 @@ public class Article {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public boolean isDraft() {
+        return draft;
+    }
+
+
 }

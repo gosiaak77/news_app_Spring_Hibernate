@@ -6,15 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.dao.ArticleDao;
-import pl.coderslab.dao.AuthorDao;
-import pl.coderslab.dao.CategoryDao;
 import pl.coderslab.entity.Article;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Category;
 import pl.coderslab.groupValidator.ValidationArticle;
+import pl.coderslab.repository.ArticleRepository;
+import pl.coderslab.repository.AuthorRepository;
+import pl.coderslab.repository.CategoryRepository;
 
-import javax.validation.Valid;
 import javax.validation.Validator;
 import java.util.List;
 
@@ -23,30 +22,30 @@ import java.util.List;
 public class ArticleController {
 
     @Autowired
-    ArticleDao aricleDao;
+    ArticleRepository articleRepository;
 
     @Autowired
-    AuthorDao authorDao;
+    AuthorRepository authorRepository;
 
     @Autowired
-    CategoryDao categoryDao;
+    CategoryRepository categoryRepository;
 
     @Autowired
     Validator validator;
 
     @ModelAttribute
     public List<Category> categories(){
-        return categoryDao.findAll();
+        return categoryRepository.findAll();
     }
 
     @ModelAttribute
     public List<Author> authors() {
-        return authorDao.findAll();
+        return authorRepository.findAll();
     }
 
     @GetMapping("")
     public String showAll(Model model){
-        List<Article> articles = aricleDao.findAll();
+        List<Article> articles = articleRepository.findAll();
         model.addAttribute("articles", articles);
         return "/article/list";
     }
@@ -62,26 +61,26 @@ public class ArticleController {
         if (validResult.hasErrors()) {
             return "article/form";
         }
-        aricleDao.save(article);
+        articleRepository.save(article);
         return "redirect:/article";
     }
 
     @GetMapping("/delete/{id}")
     public String confirmDelete(@PathVariable Long id, Model model){
-        model.addAttribute("article", aricleDao.findById(id));
+        model.addAttribute("article", articleRepository.findArticleById(id));
         return "article/delete";
     }
 
 
     @GetMapping("/deleteConfirmed/{id}")
     public String delete(@PathVariable Long id){
-        aricleDao.delete(aricleDao.findById(id));
+        articleRepository.delete(articleRepository.findArticleById(id));
         return "redirect:/article";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model){
-        model.addAttribute("article", aricleDao.findById(id));
+        model.addAttribute("article", articleRepository.findArticleById(id));
         return "article/form";
     }
 
@@ -90,7 +89,7 @@ public class ArticleController {
         if (validResult.hasErrors()) {
             return "article/form";
         }
-        aricleDao.save(article);
+        articleRepository.save(article);
         return "redirect:/article";
     }
 

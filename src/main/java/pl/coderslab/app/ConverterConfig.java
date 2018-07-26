@@ -20,14 +20,9 @@ public class ConverterConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         super.addFormatters(registry);
-        registry.addConverter(articleConverter());
         registry.addConverter(authorConverter());
+        registry.addConverter(articleConverter());
         registry.addConverter(categoryConverter());
-    }
-
-    @Bean
-    public ArticleConverter articleConverter(){
-        return new ArticleConverter();
     }
 
     @Bean
@@ -35,6 +30,14 @@ public class ConverterConfig extends WebMvcConfigurerAdapter {
         return new AuthorConverter();
     }
 
+
+    @Bean
+    public ArticleConverter articleConverter(){
+        return new ArticleConverter();
+    }
+
     @Bean
     public CategoryConverter categoryConverter() {return new CategoryConverter();}
+
+
 }
