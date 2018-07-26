@@ -10,7 +10,7 @@
     <c:forEach items="${articles}" var="article">
         <li>${article.title}
             <br><a href="${pageContext.request.contextPath}/article/edit/${article.id}">edit</a>
-            <a href="${pageContext.request.contextPath}git remote add origin https://github.com/gosiaak77/news_app_Spring_Hibernate.git/article/delete/${article.id}">delete</a></li>
+            <a href="${pageContext.request.contextPath}/article/delete/${article.id}">delete</a></li>
     </c:forEach>
 </ul>
 

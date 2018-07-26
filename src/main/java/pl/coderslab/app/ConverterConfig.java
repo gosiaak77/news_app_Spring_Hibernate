@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import pl.coderslab.converter.ArticleConverter;
 import pl.coderslab.converter.AuthorConverter;
+import pl.coderslab.converter.CategoryConverter;
 
 @Configuration
 @EnableWebMvc
@@ -19,9 +20,16 @@ public class ConverterConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addFormatters(FormatterRegistry registry) {
         super.addFormatters(registry);
-        registry.addConverter(articleConverter());
         registry.addConverter(authorConverter());
+        registry.addConverter(articleConverter());
+        registry.addConverter(categoryConverter());
     }
+
+    @Bean
+    public AuthorConverter authorConverter(){
+        return new AuthorConverter();
+    }
+
 
     @Bean
     public ArticleConverter articleConverter(){
@@ -29,7 +37,7 @@ public class ConverterConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public AuthorConverter authorConverter(){
-        return new AuthorConverter();
-    }
+    public CategoryConverter categoryConverter() {return new CategoryConverter();}
+
+
 }

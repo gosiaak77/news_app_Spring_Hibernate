@@ -2,19 +2,18 @@ package pl.coderslab.converter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
-import pl.coderslab.dao.ArticleDao;
 import pl.coderslab.entity.Article;
-import pl.coderslab.entity.Author;
+import pl.coderslab.repository.ArticleRepository;
 
 
 public class ArticleConverter implements Converter<String,Article> {
 
     @Autowired
-    ArticleDao articleDao;
+    ArticleRepository articleRepository;
 
     @Override
     public Article convert(String id) {
-        return articleDao.findById(Long.valueOf(id));
+        return articleRepository.findArticleById(Long.valueOf(id));
     }
 
 }

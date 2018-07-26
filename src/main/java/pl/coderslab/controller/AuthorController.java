@@ -3,20 +3,27 @@ package pl.coderslab.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.entity.Author;
+import pl.coderslab.repository.AuthorRepository;
+
+import javax.validation.Valid;
+import javax.validation.Validator;
 
 
 @Controller
 @RequestMapping("/author")
 public class AuthorController {
     @Autowired
-    AuthorDao authorDao;
+    AuthorRepository authorRepository;
+
+    @Autowired
+    Validator validator;
 
     @GetMapping("")
     public String showAll(Model model){
-        model.addAttribute("authors", authorDao.findAll());
+        model.addAttribute("authors", authorRepository.findAll());
         return "author/list";
     }
 
@@ -27,32 +34,38 @@ public class AuthorController {
     }
 
     @PostMapping("/form")
-    public String add(@ModelAttribute Author author){
-        authorDao.save(author);
+    public String add(@Valid Author author, BindingResult validResult){
+        if (validResult.hasErrors()) {
+            return "author/form";
+        }
+        authorRepository.save(author);
         return "redirect:/author";
     }
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Long id, Model model){
-        model.addAttribute("author", authorDao.findById(id));
+        model.addAttribute("author", authorRepository.findAuthorById(id));
         return "author/form";
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@ModelAttribute Author author){
-        authorDao.save(author);
+    public String edit(@Valid Author author, BindingResult validResult){
+        if (validResult.hasErrors()) {
+            return "author/form";
+        }
+        authorRepository.save(author);
         return "redirect:/author";
     }
 
     @GetMapping("/delete/{id}")
     public String confirmDelete(@PathVariable Long id, Model model){
-        model.addAttribute("author", authorDao.findById(id));
+        model.addAttribute("author", authorRepository.findAuthorById(id));
         return "author/delete";
     }
 
     @GetMapping("/deleteConfirmed/{id}")
     public String delete(@PathVariable Long id){
-        authorDao.delete(id);
+        authorRepository.delete(id);
         return "redirect:/author";
     }
 
