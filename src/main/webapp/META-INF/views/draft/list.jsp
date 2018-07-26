@@ -5,15 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<h3>Article list</h3>
+<h3>Drafts list</h3>
 <ul>
     <c:forEach items="${articles}" var="article">
-        <li>${article.title}
-            <br><a href="${pageContext.request.contextPath}/article/edit/${article.id}">edit</a>
+        <li>${article.title} : <br>${article.content}
+            <br><a href="${pageContext.request.contextPath}/draft/edit/${article.id}">edit</a>
             <a href="${pageContext.request.contextPath}/article/delete/${article.id}">delete</a></li>
     </c:forEach>
 </ul>
 
-<div><a href="${pageContext.request.contextPath}/article/form">Add new article</a> </div>
+<div><a href="${pageContext.request.contextPath}/draft/form">Add new draft</a> </div>
 </body>
 </html>

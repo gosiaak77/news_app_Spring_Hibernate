@@ -1,5 +1,7 @@
 package pl.coderslab.entity;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -13,8 +15,10 @@ public class Author {
     private Long id;
 
     @NotNull
+    @NotBlank
     private String firstName;
     @NotNull
+    @NotBlank
     private String lastName;
 
     @OneToMany(mappedBy = "author")
