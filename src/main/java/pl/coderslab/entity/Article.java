@@ -4,6 +4,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Controller;
+import pl.coderslab.validator.CategoryLimiter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,6 +37,7 @@ public class Article {
     private String content;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @CategoryLimiter(3)
     private List<Category> categories = new ArrayList<>();
 
 

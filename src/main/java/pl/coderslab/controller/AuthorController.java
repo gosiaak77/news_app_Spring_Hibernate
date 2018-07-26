@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.entity.Author;
 
+import javax.validation.Valid;
+
 
 @Controller
 @RequestMapping("/author")
@@ -27,7 +29,7 @@ public class AuthorController {
     }
 
     @PostMapping("/form")
-    public String add(@ModelAttribute Author author){
+    public String add(@Valid Author author){
         authorDao.save(author);
         return "redirect:/author";
     }
@@ -39,7 +41,7 @@ public class AuthorController {
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@ModelAttribute Author author){
+    public String edit(@Valid Author author){
         authorDao.save(author);
         return "redirect:/author";
     }

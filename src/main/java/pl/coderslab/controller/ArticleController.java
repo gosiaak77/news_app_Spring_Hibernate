@@ -10,6 +10,8 @@ import pl.coderslab.dao.CategoryDao;
 import pl.coderslab.entity.Article;
 import pl.coderslab.entity.Author;
 import pl.coderslab.entity.Category;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -49,7 +51,7 @@ public class ArticleController {
     }
 
     @PostMapping("/form")
-    public String form(@ModelAttribute Article article) {
+    public String form(@Valid Article article) {
         aricleDao.save(article);
         return "redirect:/article";
     }
@@ -74,7 +76,7 @@ public class ArticleController {
     }
 
     @PostMapping("/edit/{id}")
-    public String edit(@ModelAttribute Article article){
+    public String edit(@Valid Article article){
         aricleDao.save(article );
         return "redirect:/article";
     }
