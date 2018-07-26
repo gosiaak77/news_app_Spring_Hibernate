@@ -2,12 +2,15 @@ package pl.coderslab.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Controller;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -19,6 +22,8 @@ public class Article {
     private Long id;
 
     @Column(length = 200)
+    @NotNull
+    @Max(200)
     private String title;
 
     @ManyToOne
@@ -26,6 +31,8 @@ public class Article {
     private Author author;
 
     @Column(columnDefinition = "TEXT")
+    @NotNull
+    @Max(500)
     private String content;
 
     @ManyToMany(fetch = FetchType.EAGER)

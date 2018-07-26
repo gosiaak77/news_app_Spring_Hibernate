@@ -1,7 +1,12 @@
 package pl.coderslab.entity;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
+import pl.coderslab.validator.CategoryLimiter;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +16,13 @@ public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Min(5)
     private String name;
     private String description;
 
     @ManyToMany(mappedBy = "categories", fetch = FetchType.EAGER)
+    @NotEmpty
+    @CategoryLimiter(3)
     private List<Article> articles = new ArrayList<>();
 
     public Category() {
