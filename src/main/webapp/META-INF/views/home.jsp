@@ -10,10 +10,12 @@
 <h2>Last 5 articles</h2>
 <c:forEach items="${articles}" var="article">
     <h4>${article.title}</h4>
-    <p>${article.content.substring(0,200)}...</p>
-    <p>author: ${article.author.firstName} ${article.author.lastName}</p>
+    <c:set var="shortDesc" value="${fn:substring(article.content, 0, 200)}" />
+    <p>${shortDesc}...</p>
+    <p>${article.author.firstName} ${article.author.lastName}</p>
     <p>created: ${article.created}</p>
 </c:forEach>
+
 <br>
 
 <p><a href="${pageContext.request.contextPath}/category/">Categories manager</a> ||

@@ -9,10 +9,12 @@ import java.util.List;
 
 public interface ArticleRepository extends JpaRepository<Article, Long> {
 
-    @Query(value = "SELECT * FROM articles WHERE id = :id", nativeQuery = true)
-    Article findArticleById(@Param("id")Long id);
+    Article findArticleById(Long id);
 
     @Query("SELECT a FROM Article a WHERE a.draft=true ")
     List<Article> findAllDrafts();
+
+    @Query(value = "SELECT * FROM articles ORDER BY created LIMIT 5", nativeQuery = true)
+    List<Article> findLastFiveArticles();
 
 }

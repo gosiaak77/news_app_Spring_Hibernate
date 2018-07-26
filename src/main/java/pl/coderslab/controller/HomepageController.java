@@ -7,23 +7,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import pl.coderslab.entity.Article;
 import pl.coderslab.entity.Category;
+import pl.coderslab.repository.ArticleRepository;
+import pl.coderslab.repository.AuthorRepository;
+import pl.coderslab.repository.CategoryRepository;
 
 import java.util.List;
 
 @Controller
 public class HomepageController {
     @Autowired
-    AuthorDao authorDao;
+    CategoryRepository categoryRepository;
 
     @Autowired
-    CategoryDao categoryDao;
-
-    @Autowired
-    ArticleDao articleDao;
+    ArticleRepository articleRepository;
 
     @GetMapping("/")
     public String displayArticles(Model model){
-        List<Article> articles = articleDao.findLast(5L);
+        List<Article> articles = articleRepository.findLastFiveArticles();
         model.addAttribute("articles", articles);
         return "home";
     }
@@ -31,7 +31,7 @@ public class HomepageController {
 
     @ModelAttribute
     public List<Category> categories(){
-        return categoryDao.findAll();
+        return categoryRepository.findAll();
     }
 
 }
